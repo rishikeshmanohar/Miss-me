@@ -1,0 +1,800 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  body {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+    font-family: "Quicksand", sans-serif;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "💕";
+    position: fixed;
+    top: 10%;
+    left: 10%;
+    font-size: clamp(1rem, 3vw, 2rem);
+    animation: float 6s ease-in-out infinite;
+    opacity: 0.3;
+  }
+
+  body::after {
+    content: "💖";
+    position: fixed;
+    top: 20%;
+    right: 15%;
+    font-size: clamp(0.8rem, 2.5vw, 1.5rem);
+    animation: float 8s ease-in-out infinite reverse;
+    opacity: 0.3;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(10deg); }
+  }
+
+  .container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-100%, -50%);
+    transition: 0.2s;
+    width: 90%;
+    max-width: 600px;
+  }
+  
+  .question-container {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transition: 0.2s;
+    text-align: center;
+    width: 100%;
+  }
+  .local-gif {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 20px;
+    display: block;
+    margin: 0 auto 2rem auto;
+    pointer-events: none;
+    box-shadow: 0 10px 30px rgba(255, 182, 193, 0.3);
+  }
+  
+  .question {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    margin-bottom: 1rem;
+    color: #ff6b9d;
+    text-shadow: 2px 2px 4px rgba(255, 107, 157, 0.3);
+    animation: pulse 2s ease-in-out infinite;
+    line-height: 1.2;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  .subtitle {
+    font-size: clamp(0.9rem, 3vw, 1.2rem);
+    color: #ff8fab;
+    margin-bottom: 2rem;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+    gap: clamp(1rem, 4vw, 2rem);
+    position: relative;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+  .btn {
+    position: relative;
+    border: none;
+    border-radius: 50px;
+    padding: clamp(12px, 3vw, 15px) clamp(20px, 5vw, 30px);
+    font-family: "Quicksand", sans-serif;
+    font-size: clamp(14px, 3.5vw, 18px);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: linear-gradient(45deg, #ff6b9d, #ff8fab);
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    white-space: nowrap;
+    min-width: 120px;
+  }
+  .btn:hover {
+    background: linear-gradient(45deg, #ff8fab, #ffb3d1);
+    transform: scale(1.15);
+    box-shadow: 0 12px 35px rgba(255, 107, 157, 0.6);
+    text-shadow: 1px 1px 5px rgba(255, 182, 193, 0.8);
+  }
+  
+  .yes-btn {
+    animation: bounce 2s ease-in-out infinite;
+  }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0) scale(1.05); }
+    40% { transform: translateY(-10px) scale(1.1); }
+    60% { transform: translateY(-5px) scale(1.08); }
+  }
+
+  .no-btn {
+    position: relative;
+  }
+  
+  .result-container {
+    display: none;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-100%, -50%);
+    transition: 0.2s;
+    text-align: center;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .gif-result {
+    border-radius: 20px;
+    margin-bottom: 2rem;
+    box-shadow: 0 15px 40px rgba(255, 107, 157, 0.4);
+    width: 100%;
+    max-width: 300px;
+  }
+  .result-container h2 {
+    font-size: clamp(1.8rem, 6vw, 3.2rem);
+    text-align: center;
+    color: #ff6b9d;
+    text-shadow: 2px 2px 4px rgba(255, 107, 157, 0.3);
+    margin-bottom: 1rem;
+    animation: rainbow 3s ease-in-out infinite;
+    line-height: 1.2;
+  }
+
+  @keyframes rainbow {
+    0%, 100% { color: #ff6b9d; }
+    25% { color: #ff8fab; }
+    50% { color: #ffb3d1; }
+    75% { color: #ff8fab; }
+  }
+
+  .love-message {
+    font-size: clamp(1rem, 3.5vw, 1.3rem);
+    color: #ff8fab;
+    margin-bottom: 2rem;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .floating-hearts {
+    position: relative;
+    height: clamp(60px, 15vw, 100px);
+  }
+
+  .floating-hearts .heart {
+    position: absolute;
+    font-size: clamp(1.2rem, 4vw, 2rem);
+    animation: floatHeart 4s ease-in-out infinite;
+  }
+
+  .floating-hearts .heart:nth-child(1) {
+    left: 10%;
+    animation-delay: 0s;
+  }
+
+  .floating-hearts .heart:nth-child(2) {
+    left: 30%;
+    animation-delay: 0.8s;
+  }
+
+  .floating-hearts .heart:nth-child(3) {
+    left: 50%;
+    animation-delay: 1.6s;
+  }
+
+  .floating-hearts .heart:nth-child(4) {
+    left: 70%;
+    animation-delay: 2.4s;
+  }
+
+  .floating-hearts .heart:nth-child(5) {
+    left: 90%;
+    animation-delay: 3.2s;
+  }
+
+  @keyframes floatHeart {
+    0%, 100% { 
+      transform: translateY(0px) rotate(0deg) scale(1);
+      opacity: 0.7;
+    }
+    50% { 
+      transform: translateY(-30px) rotate(180deg) scale(1.2);
+      opacity: 1;
+    }
+  }
+
+  .video-container {
+    margin-top: 2rem;
+    text-align: center;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.8s ease;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .video-container.show {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .video-container iframe {
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3);
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+  }
+  
+  .cssload-main {
+    display: none;
+    position: absolute;
+    content: "";
+    top: 17%;
+    left: 50%;
+    margin: 200px auto 0 auto;
+    transform: translate(-100%, -50%);
+    -o-transform: translate(-100%, -240%);
+    -ms-transform: translate(-100%, -240%);
+    -webkit-transform: translate(-100%, -240%);
+    -moz-transform: translate(-100%, -240%);
+  }
+  
+  .cssload-main * {
+    font-size: clamp(40px, 10vw, 62px);
+  }
+  
+  .cssload-heart {
+    animation: cssload-heart 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+    -o-animation: cssload-heart 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite
+      normal;
+    -ms-animation: cssload-heart 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite
+      normal;
+    -webkit-animation: cssload-heart 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite
+      normal;
+    -moz-animation: cssload-heart 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite
+      normal;
+    top: 50%;
+    content: "";
+    left: 50%;
+    position: absolute;
+  }
+  
+  .cssload-heartL {
+    width: 1em;
+    height: 1em;
+    border: 1px solid #ff6b9d;
+    background-color: #ff6b9d;
+    content: "";
+    position: absolute;
+    display: block;
+    border-radius: 100%;
+    animation: cssload-heartL 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+    -o-animation: cssload-heartL 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite
+      normal;
+    -ms-animation: cssload-heartL 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite
+      normal;
+    -webkit-animation: cssload-heartL 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite
+      normal;
+    -moz-animation: cssload-heartL 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite
+      normal;
+    transform: translate(-28px, -27px);
+    -o-transform: translate(-28px, -27px);
+    -ms-transform: translate(-28px, -27px);
+    -webkit-transform: translate(-28px, -27px);
+    -moz-transform: translate(-28px, -27px);
+  }
+  
+  .cssload-heartR {
+    width: 1em;
+    height: 1em;
+    border: 1px solid #ff6b9d;
+    background-color: #ff6b9d;
+    content: "";
+    position: absolute;
+    display: block;
+    border-radius: 100%;
+    transform: translate(28px, -27px);
+    -o-transform: translate(28px, -27px);
+    -ms-transform: translate(28px, -27px);
+    -webkit-transform: translate(28px, -27px);
+    -moz-transform: translate(28px, -27px);
+    animation: cssload-heartR 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+    -o-animation: cssload-heartR 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite
+      normal;
+    -ms-animation: cssload-heartR 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite
+      normal;
+    -webkit-animation: cssload-heartR 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite
+      normal;
+    -moz-animation: cssload-heartR 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite
+      normal;
+  }
+  
+  .cssload-square {
+    width: 1em;
+    height: 1em;
+    border: 1px solid #ff6b9d;
+    background-color: #ff6b9d;
+    position: relative;
+    display: block;
+    content: "";
+    transform: scale(1) rotate(-45deg);
+    -o-transform: scale(1) rotate(-45deg);
+    -ms-transform: scale(1) rotate(-45deg);
+    -webkit-transform: scale(1) rotate(-45deg);
+    -moz-transform: scale(1) rotate(-45deg);
+    animation: cssload-square 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+    -o-animation: cssload-square 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite
+      normal;
+    -ms-animation: cssload-square 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite
+      normal;
+    -webkit-animation: cssload-square 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite
+      normal;
+    -moz-animation: cssload-square 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite
+      normal;
+  }
+  
+  .cssload-shadow {
+    top: 97px;
+    left: 50%;
+    content: "";
+    position: relative;
+    display: block;
+    bottom: -0.5em;
+    width: 1em;
+    height: 0.24em;
+    background-color: rgba(255, 107, 157, 0.3);
+    border: 1px solid rgba(255, 107, 157, 0.3);
+    border-radius: 50%;
+    animation: cssload-shadow 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
+    -o-animation: cssload-shadow 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite
+      normal;
+    -ms-animation: cssload-shadow 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite
+      normal;
+    -webkit-animation: cssload-shadow 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite
+      normal;
+    -moz-animation: cssload-shadow 2.88s cubic-bezier(0.75, 0, 0.5, 1) infinite
+      normal;
+  }
+  
+  @keyframes cssload-square {
+    50% {
+      border-radius: 100%;
+      transform: scale(0.5) rotate(-45deg);
+    }
+    100% {
+      transform: scale(1) rotate(-45deg);
+    }
+  }
+  
+  @-o-keyframes cssload-square {
+    50% {
+      border-radius: 100%;
+      -o-transform: scale(0.5) rotate(-45deg);
+    }
+    100% {
+      -o-transform: scale(1) rotate(-45deg);
+    }
+  }
+  
+  @-ms-keyframes cssload-square {
+    50% {
+      border-radius: 100%;
+      -ms-transform: scale(0.5) rotate(-45deg);
+    }
+    100% {
+      -ms-transform: scale(1) rotate(-45deg);
+    }
+  }
+  
+  @-webkit-keyframes cssload-square {
+    50% {
+      border-radius: 100%;
+      -webkit-transform: scale(0.5) rotate(-45deg);
+    }
+    100% {
+      -webkit-transform: scale(1) rotate(-45deg);
+    }
+  }
+  
+  @-moz-keyframes cssload-square {
+    50% {
+      border-radius: 100%;
+      -moz-transform: scale(0.5) rotate(-45deg);
+    }
+    100% {
+      -moz-transform: scale(1) rotate(-45deg);
+    }
+  }
+  
+  @keyframes cssload-heart {
+    50% {
+      transform: rotate(360deg);
+    }
+    100% {
+      transform: rotate(720deg);
+    }
+  }
+  
+  @-o-keyframes cssload-heart {
+    50% {
+      -o-transform: rotate(360deg);
+    }
+    100% {
+      -o-transform: rotate(720deg);
+    }
+  }
+  
+  @-ms-keyframes cssload-heart {
+    50% {
+      -ms-transform: rotate(360deg);
+    }
+    100% {
+      -ms-transform: rotate(720deg);
+    }
+  }
+  
+  @-webkit-keyframes cssload-heart {
+    50% {
+      -webkit-transform: rotate(360deg);
+    }
+    100% {
+      -webkit-transform: rotate(720deg);
+    }
+  }
+  
+  @-moz-keyframes cssload-heart {
+    50% {
+      -moz-transform: rotate(360deg);
+    }
+    100% {
+      -moz-transform: rotate(720deg);
+    }
+  }
+  
+  @keyframes cssload-heartL {
+    60% {
+      transform: scale(0.4);
+    }
+  }
+  
+  @-o-keyframes cssload-heartL {
+    60% {
+      -o-transform: scale(0.4);
+    }
+  }
+  
+  @-ms-keyframes cssload-heartL {
+    60% {
+      -ms-transform: scale(0.4);
+    }
+  }
+  
+  @-webkit-keyframes cssload-heartL {
+    60% {
+      -webkit-transform: scale(0.4);
+    }
+  }
+  
+  @-moz-keyframes cssload-heartL {
+    60% {
+      -moz-transform: scale(0.4);
+    }
+  }
+  
+  @keyframes cssload-heartR {
+    40% {
+      transform: scale(0.4);
+    }
+  }
+  
+  @-o-keyframes cssload-heartR {
+    40% {
+      -o-transform: scale(0.4);
+    }
+  }
+  
+  @-ms-keyframes cssload-heartR {
+    40% {
+      -ms-transform: scale(0.4);
+    }
+  }
+  
+  @-webkit-keyframes cssload-heartR {
+    40% {
+      -webkit-transform: scale(0.4);
+    }
+  }
+  
+  @-moz-keyframes cssload-heartR {
+    40% {
+      -moz-transform: scale(0.4);
+    }
+  }
+  
+  @keyframes cssload-shadow {
+    50% {
+      transform: scale(0.5);
+      border-color: rgba(255, 107, 157, 0.5);
+    }
+  }
+  
+  @-o-keyframes cssload-shadow {
+    50% {
+      -o-transform: scale(0.5);
+      border-color: rgba(255, 107, 157, 0.5);
+    }
+  }
+  
+  @-ms-keyframes cssload-shadow {
+    50% {
+      -ms-transform: scale(0.5);
+      border-color: rgba(255, 107, 157, 0.5);
+    }
+  }
+  
+  @-webkit-keyframes cssload-shadow {
+    50% {
+      -webkit-transform: scale(0.5);
+      border-color: rgba(255, 107, 157, 0.5);
+    }
+  }
+  
+  @-moz-keyframes cssload-shadow {
+    50% {
+      -moz-transform: scale(0.5);
+      border-color: rgba(255, 107, 157, 0.5);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      width: 95%;
+      top: 45%;
+    }
+    
+    .question-container {
+      top: 35%;
+    }
+    
+    .result-container {
+      top: 35%;
+    }
+    
+    .button-container {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .btn {
+      width: 200px;
+      max-width: 80vw;
+    }
+    
+    .local-gif,
+    .gif-result {
+      max-width: 250px;
+    }
+    
+    .cssload-main {
+      top: 25%;
+    }
+
+    .video-container {
+      margin-top: 1.5rem;
+      padding: 0 10px;
+    }
+
+    .video-container iframe {
+      max-width: 100%;
+      width: 100%;
+      height: 200px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .container {
+      width: 98%;
+      top: 50%;
+    }
+    
+    .question-container {
+      top: 30%;
+    }
+    
+    .result-container {
+      top: 30%;
+    }
+    
+    .question {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .subtitle {
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .love-message {
+      font-size: 1rem;
+    }
+    
+    .btn {
+      width: 180px;
+      padding: 10px 20px;
+      font-size: 14px;
+    }
+    
+    .local-gif,
+    .gif-result {
+      max-width: 200px;
+      margin-bottom: 1.5rem;
+    }
+    
+    .floating-hearts {
+      height: 50px;
+    }
+    
+    .floating-hearts .heart {
+      font-size: 1.2rem;
+    }
+    
+    body::before,
+    body::after {
+      display: none;
+    }
+
+    .video-container {
+      margin-top: 1rem;
+      padding: 0 5px;
+    }
+
+    .video-container iframe {
+      max-width: 100%;
+      width: 100%;
+      height: 180px;
+      border-radius: 10px;
+    }
+  }
+
+  @media (max-width: 320px) {
+    .question {
+      font-size: 1.8rem;
+    }
+    
+    .subtitle {
+      font-size: 0.8rem;
+    }
+    
+    .btn {
+      width: 160px;
+      font-size: 13px;
+    }
+    
+    .local-gif,
+    .gif-result {
+      max-width: 180px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .container {
+      max-width: 800px;
+    }
+    
+    .question {
+      font-size: 4rem;
+    }
+    
+    .subtitle {
+      font-size: 1.4rem;
+    }
+    
+    .btn {
+      padding: 18px 35px;
+      font-size: 20px;
+    }
+    
+    .local-gif,
+    .gif-result {
+      max-width: 350px;
+    }
+
+    .result-container {
+      max-height: 85vh;
+      padding: 20px;
+    }
+
+    .result-container h2 {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .love-message {
+      font-size: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .video-container {
+      margin-top: 2.5rem;
+    }
+
+    .video-container iframe {
+      max-width: 600px;
+      height: 337px;
+    }
+  }
+
+  @media (orientation: landscape) and (max-height: 600px) {
+    .container {
+      top: 50%;
+    }
+    
+    .question-container {
+      top: 50%;
+    }
+    
+    .result-container {
+      top: 50%;
+    }
+    
+    .question {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .subtitle {
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    
+    .local-gif,
+    .gif-result {
+      max-width: 150px;
+      margin-bottom: 1rem;
+    }
+    
+    .button-container {
+      margin-top: 1rem;
+    }
+    
+    .btn {
+      padding: 8px 16px;
+      font-size: 14px;
+    }
+  }
